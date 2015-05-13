@@ -104,11 +104,9 @@ $(document).ready(function(){
   function process_data(data){
     var deferred = $.Deferred();
     var array = [];
-    var i = 1;
     $.when(
       $.each(data, function(key, value){
-        array.push(["CDS-2014-00"+i, value.total]);
-        i++;
+        array.push([value.report, value.total]);
       })
     ).done(function(){
       deferred.resolve(array);
@@ -120,12 +118,11 @@ $(document).ready(function(){
     var deferred = $.Deferred();
     var result = {};
     var result_test = [];
-    var i = 1;
     $.when(
       $.each(data, function(key, value){
         if (value.conferences !== undefined){
           result[key] = {
-            label: "CDS-2014-00"+i,
+            label: value.report,
             data: []
           }
           $.when(
@@ -136,7 +133,6 @@ $(document).ready(function(){
           ).done(function(){
           })
         }
-        i++;
       })
     ).done(function(){
       deferred.resolve(result, result_test);
