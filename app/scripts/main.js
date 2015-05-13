@@ -36,10 +36,10 @@ $(document).ready(function(){
   }
 
   $.when(get_data()).then(function(results){
-    downloads = results.downloads;
-    views = results.views;
-    create_download_plot(results.downloads);
-    create_pageviews_plot(results.views);
+    downloads = _.sortBy(results.downloads, 'report')
+    views = _.sortBy(results.views, 'report')
+    create_download_plot(downloads);
+    create_pageviews_plot(views);
     create_interactive_pageviews_plot(false);
     create_interactive_downloads_plot(false);
   }, function(error){
